@@ -19,4 +19,7 @@ public interface PracticaRepository extends JpaRepository<Practica, Long> {
 
     // Consultar prácticas por descripción parcial (útil para búsquedas)
     List<Practica> findByDescripcionIgnoreCaseContaining(String descripcion);
+
+    // Método para buscar prácticas por estudiante
+    List<Practica> findByEstudianteId(Long estudianteId);
 }

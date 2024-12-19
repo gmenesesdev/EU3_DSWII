@@ -10,6 +10,7 @@ import evu3_api_grupo11.evu3.repositories.PracticaRepository;
 
 @Service
 public class PracticaService {
+
     @Autowired
     private PracticaRepository practicaRepository;
 
@@ -19,8 +20,13 @@ public class PracticaService {
     }
 
     // Listar todas las prácticas
-    public List<Practica> listarTodas() {
+    public List<Practica> listar() {
         return practicaRepository.findAll();
+    }
+
+    // Listar las prácticas por estudiante
+    public List<Practica> listarPorEstudiante(Long idEstudiante) {
+        return practicaRepository.findByEstudianteId(idEstudiante);
     }
 
     // Buscar una práctica por ID
@@ -28,14 +34,7 @@ public class PracticaService {
         return practicaRepository.findById(id).orElse(null);
     }
 
-    // Listar prácticas por un estudiante
-    public List<Practica> listarPorEstudiante(Long estudianteId) {
-        return practicaRepository.findAll().stream()
-                .filter(practica -> practica.getEstudiante().getId().equals(estudianteId))
-                .toList();
-    }
-
-    // Eliminar una práctica por ID
+    // Eliminar una práctica
     public void eliminar(Long id) {
         practicaRepository.deleteById(id);
     }
